@@ -1,0 +1,30 @@
+{
+  "name": "es3-safe-recast",
+  "version": "0.0.0",
+  "description": "esprima/recast es3 safe compile step",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec tests/**/*-test.js",
+    "test-watch": "mocha --watch --reporter spec tests/**/*-test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url":  "https://github.com/stefanpenner/es3-safe-recast.git"
+  },
+  "author": "Stefan Penner",
+  "license": "ISC",
+  "dependencies": {
+    "recast": "~0.5.20",
+    "es6-computed-property-keys": "~0.1.1",
+    "es-simpler-traverser": "0.0.1",
+    "esprima": "~1.2.2"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2",
+    "better-assert": "~1.0.0",
+    "esprima-ast-equality": "0.0.4"
+  }
+}
