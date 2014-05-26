@@ -27,7 +27,8 @@ from:
 ```js
 a = {
   catch: function()   { },
-  finally: function() { }
+  finally: function() { },
+  default: function() { }
 };
 ```
 
@@ -36,6 +37,7 @@ to:
 
 a = {
   'catch':   function() { },
-  'finally': function() { }
+  'finally': function() { },
+  'default': function() { }
 };
 ```
