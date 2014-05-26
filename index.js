@@ -32,6 +32,8 @@ var ES6Safe = Visitor.extend({
   }
 });
 
+module.exports.Visitor = ES6Safe;
+
 module.exports.compile = function(source) {
   var ast, code;
   if (TEST_REGEX.test(source)) {
