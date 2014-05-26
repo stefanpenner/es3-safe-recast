@@ -32,11 +32,19 @@ var ES6Safe = Visitor.extend({
 });
 
 module.exports.compile = function(source) {
-  var ast = recast.parse(source);
-  new ES6Safe().visit(ast);
-  var code = recast.print(ast).code;
+  var ast, code;
+  if (TEST_REGEX.test(source)) {
+    ast = recast.parse(source);
+    new ES6Safe().visit(ast);
+    code = recast.print(ast).code;
+  } else {
+    code = source;
+  }
+
   return code;
 };
+
+var TEST_REGEX = module.exports.TEST_REGEX = /catch|finally/i;
 
 module.exports.visit = function(ast) {
   new ES6Safe().visit(ast);
