@@ -4,4 +4,6 @@ object.finally(function(){
   throw reason;
 }).catch(function(reason) {
   throw reason;
+}).default(function(){
+
 });

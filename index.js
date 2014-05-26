@@ -7,7 +7,8 @@ var builders = types.builders;
 
 var identifierToLiteral = {
   "finally": true,
-  "catch": true
+  "catch": true,
+  "default": true
 };
 
 var ES6Safe = Visitor.extend({
