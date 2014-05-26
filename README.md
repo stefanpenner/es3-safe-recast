@@ -19,3 +19,23 @@ ajax('/asdf/1')['catch'](function(reason) {
 
 });
 ```
+
+
+and
+
+from:
+```js
+a = {
+  catch: function()   { },
+  finally: function() { }
+};
+```
+
+to:
+```js
+
+a = {
+  'catch':   function() { },
+  'finally': function() { }
+};
+```
