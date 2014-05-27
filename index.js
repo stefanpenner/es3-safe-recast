@@ -51,7 +51,11 @@ module.exports.compile = function(source) {
   return code;
 };
 
-var TEST_REGEX = module.exports.TEST_REGEX = /catch|finally/i;
+var TEST_REGEX = module.exports.TEST_REGEX = buildTestRegex();
+function buildTestRegex() {
+  var regexString = Object.keys(identifierToLiteral).join('|');
+  return new RegExp(regexString, 'i');
+}
 
 module.exports.visit = function(ast) {
   new ES6Safe().visit(ast);
