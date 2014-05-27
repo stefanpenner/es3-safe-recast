@@ -6,9 +6,13 @@ var namedTypes = types.namedTypes;
 var builders = types.builders;
 
 var identifierToLiteral = {
-  "finally": true,
-  "catch": true,
-  "default": true
+  finally: true,
+  catch:   true,
+  default: true,
+  new:     true,
+  throw:   true,
+  return:  true,
+  import:  true
 };
 
 var ES6Safe = Visitor.extend({
