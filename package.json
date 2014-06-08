@@ -1,6 +1,6 @@
 {
   "name": "es3-safe-recast",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "esprima/recast es3 safe compile step",
   "main": "index.js",
   "directories": {
@@ -18,7 +18,6 @@
   "license": "ISC",
   "dependencies": {
     "recast": "~0.5.20",
-    "es6-computed-property-keys": "~0.1.1",
     "es-simpler-traverser": "0.0.1",
     "esprima": "~1.2.2"
   },
