@@ -24,114 +24,87 @@ describe('object member', function() {
   });
 });
 
-describe('catch', function() {
-  it('works with literal syntax', function() {
-    var actual = compiler.compile('var object = {\ncatch: null,\n};');
-    var expected = 'var object = {\n"catch": null,\n};'
+function literalTestSuite(literal) {
+  describe(literal, function() {
+    it('works with literal syntax', function() {
+      var actual = compiler.compile('var object = {\n' + literal + ': null,\n};');
+      var expected = 'var object = {\n"' + literal + '": null,\n};'
 
-    astEqual(actual, expected, 'expected input.js and output.js to match');
+      astEqual(actual, expected, 'expected input.js and output.js to match');
+    });
+
+    it('works with member syntax', function() {
+      var actual = compiler.compile('object.' + literal + '(function(){\n\n});');
+      var expected = 'object["' + literal + '"](function(){\n\n});';
+
+      astEqual(actual, expected, 'expected input.js and output.js to match');
+    });
   });
+}
 
-  it('works with member syntax', function() {
-    var actual = compiler.compile('object.catch(function(){\n\n});');
-    var expected = 'object["catch"](function(){\n\n});';
+// Keyword
+literalTestSuite('break');
+literalTestSuite('case');
+literalTestSuite('catch');
+literalTestSuite('continue');
+literalTestSuite('default');
+literalTestSuite('delete');
+literalTestSuite('do');
+literalTestSuite('else');
+literalTestSuite('finally');
+literalTestSuite('for');
+literalTestSuite('function');
+literalTestSuite('if');
+literalTestSuite('in');
+literalTestSuite('instanceof');
+literalTestSuite('new');
+literalTestSuite('return');
+literalTestSuite('switch');
+literalTestSuite('this');
+literalTestSuite('throw');
+literalTestSuite('try');
+literalTestSuite('typeof');
+literalTestSuite('var');
+literalTestSuite('void');
+literalTestSuite('while');
+literalTestSuite('with');
 
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-});
+// FutureReservedWords
+literalTestSuite('abstract');
+literalTestSuite('boolean');
+literalTestSuite('byte');
+literalTestSuite('char');
+literalTestSuite('class');
+literalTestSuite('const');
+literalTestSuite('debugger');
+literalTestSuite('double');
+literalTestSuite('enum');
+literalTestSuite('export');
+literalTestSuite('extends');
+literalTestSuite('final');
+literalTestSuite('float');
+literalTestSuite('goto');
+literalTestSuite('implements');
+literalTestSuite('import');
+literalTestSuite('int');
+literalTestSuite('interface');
+literalTestSuite('long');
+literalTestSuite('native');
+literalTestSuite('package');
+literalTestSuite('private');
+literalTestSuite('protected');
+literalTestSuite('public');
+literalTestSuite('short');
+literalTestSuite('static');
+literalTestSuite('super');
+literalTestSuite('synchronized');
+literalTestSuite('throws');
+literalTestSuite('transient');
+literalTestSuite('volatile');
 
-describe('finally', function() {
-  it('works with literal syntax', function() {
-    var actual = compiler.compile('var object = {\nfinally: null,\n};');
-    var expected = 'var object = {\n"finally": null,\n};'
+// NullLiteral
+literalTestSuite('null');
 
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-
-  it('works with member syntax', function() {
-    var actual = compiler.compile('object.finally(function(){\n\n});');
-    var expected = 'object["finally"](function(){\n\n});';
-
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-});
-
-describe('default', function() {
-  it('works with literal syntax', function() {
-    var actual = compiler.compile('var object = {\ndefault: null,\n};');
-    var expected = 'var object = {\n"default": null,\n};'
-
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-
-  it('works with member syntax', function() {
-    var actual = compiler.compile('object.default(function(){\n\n});');
-    var expected = 'object["default"](function(){\n\n});';
-
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-});
-
-describe('new', function() {
-  it('works with literal syntax', function() {
-    var actual = compiler.compile('var object = {\nnew: null,\n};');
-    var expected = 'var object = {\n"new": null,\n};'
-
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-
-  it('works with member syntax', function() {
-    var actual = compiler.compile('object.new(function(){\n\n});');
-    var expected = 'object["new"](function(){\n\n});';
-
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-});
-
-describe('throw', function() {
-  it('works with literal syntax', function() {
-    var actual = compiler.compile('var object = {\nthrow: null,\n};');
-    var expected = 'var object = {\n"throw": null,\n};'
-
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-
-  it('works with member syntax', function() {
-    var actual = compiler.compile('object.throw(function(){\n\n});');
-    var expected = 'object["throw"](function(){\n\n});';
-
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-});
-
-describe('return', function() {
-  it('works with literal syntax', function() {
-    var actual = compiler.compile('var object = {\nreturn: null,\n};');
-    var expected = 'var object = {\n"return": null,\n};'
-
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-
-  it('works with member syntax', function() {
-    var actual = compiler.compile('object.return(function(){\n\n});');
-    var expected = 'object["return"](function(){\n\n});';
-
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-});
-
-describe('import', function() {
-  it('works with literal syntax', function() {
-    var actual = compiler.compile('var object = {\nimport: null,\n};');
-    var expected = 'var object = {\n"import": null,\n};'
-
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-
-  it('works with member syntax', function() {
-    var actual = compiler.compile('object.import(function(){\n\n});');
-    var expected = 'object["import"](function(){\n\n});';
-
-    astEqual(actual, expected, 'expected input.js and output.js to match');
-  });
-});
+// BooleanLiteral
+literalTestSuite('true');
+literalTestSuite('false');

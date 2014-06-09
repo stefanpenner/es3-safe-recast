@@ -1,17 +1,19 @@
-es3-safe-recast
-===============
+# es3-safe-recast
 
+Recasts all [ECMAScript 3][1] reserved words to their safe alternatives.
 
-from:
+## Before
+
 ```js
-ajax('/asdf/1').catch(function() {
+ajax('/asdf/1').catch(function(reason) {
 
 }).finally(function() {
 
 });
 ```
 
-to:
+## After
+
 ```js
 ajax('/asdf/1')['catch'](function(reason) {
 
@@ -20,24 +22,24 @@ ajax('/asdf/1')['catch'](function(reason) {
 });
 ```
 
+## Before
 
-and
-
-from:
 ```js
-a = {
-  catch: function()   { },
-  finally: function() { },
-  default: function() { }
+object = {
+  catch:   function() {},
+  finally: function() {},
+  default: function() {}
 };
 ```
 
-to:
-```js
+## After
 
-a = {
-  'catch':   function() { },
-  'finally': function() { },
-  'default': function() { }
+```js
+object = {
+  'catch':   function() {},
+  'finally': function() {},
+  'default': function() {}
 };
 ```
+
+[1]: http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%203rd%20edition,%20December%201999.pdf
