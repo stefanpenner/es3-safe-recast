@@ -19,7 +19,7 @@
   "dependencies": {
     "recast": "~0.5.20",
     "es-simpler-traverser": "0.0.1",
-    "esprima": "~1.2.2"
+    "esprima": "git+https://github.com/thomasboyt/esprima#4be906f1abcbb"
   },
   "devDependencies": {
     "mocha": "~1.18.2",

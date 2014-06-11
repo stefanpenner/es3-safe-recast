@@ -14,6 +14,15 @@ describe('object properties', function() {
   });
 });
 
+describe('parses es6-module-syntax without error', function() {
+  it('works', function(done) {
+    var path = './tests/fixtures/es6-module-syntax';
+    var actual = compiler.compile(readFileSync(path + '/input.js'));
+    done();
+  });
+});
+
+
 describe('object member', function() {
   it('works', function() {
     var path = './tests/fixtures/object-member';
