@@ -115,7 +115,10 @@ module.exports.compile = function(source) {
 
 var TEST_REGEX = module.exports.TEST_REGEX = buildTestRegex();
 function buildTestRegex() {
-  var regexString = Object.keys(identifierToLiteral).join('|');
+  var literalsString = Object.keys(identifierToLiteral).join('|');
+  var memberString = '\\.\\s*(' + literalsString + ')';
+  var propertyString = '(' + literalsString + ')\\s*\\:';
+  var regexString = memberString + '|' + propertyString;
   return new RegExp(regexString, 'i');
 }
 
