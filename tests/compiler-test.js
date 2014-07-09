@@ -33,6 +33,14 @@ describe('object member', function() {
   });
 });
 
+it('protected local variable scope test', function() {
+  var path = './tests/fixtures/local-variable';
+  var actual = compiler.compile(readFileSync(path + '/input.js'));
+  var expected = readFileSync(path + '/output.js');
+
+  astEqual(actual, expected, 'expected input.js and output.js to match');
+});
+
 function literalTestSuite(literal) {
   describe(literal, function() {
     it('works with literal syntax', function() {
