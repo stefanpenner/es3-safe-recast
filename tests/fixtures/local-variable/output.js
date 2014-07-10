@@ -6,7 +6,7 @@ var Namespace = EmberObject.extend({
     Namespace.PROCESSED = false;
   },
 
-  "toString": function() {
+  toString: function() {
     var name = get(this, 'name');
     if (name) { return name; }
 
@@ -15,12 +15,12 @@ var Namespace = EmberObject.extend({
   },
 
   nameClasses: function() {
-    processNamespace([this["toString"]()], this, {});
+    processNamespace([this.toString()], this, {});
   },
 
   destroy: function() {
     var namespaces = Namespace.NAMESPACES,
-        toString = this["toString"]();
+        toString = this.toString();
 
     if (toString) {
       Ember.lookup[toString] = undefined;
@@ -47,7 +47,7 @@ Namespace.reopenClass({
 
 var NAMESPACES_BY_ID = Namespace.NAMESPACES_BY_ID;
 
-var hasOwnProp = ({})["hasOwnProperty"];
+var hasOwnProp = ({}).hasOwnProperty;
 
 function processNamespace(paths, root, seen) {
   var idx = paths.length;
@@ -67,10 +67,10 @@ function processNamespace(paths, root, seen) {
     paths[idx] = key;
 
     // If we have found an unprocessed class
-    if (obj && obj["toString"] === classToString) {
+    if (obj && obj.toString === classToString) {
       // Replace the class' `toString` with the dot-separated path
       // and set its `NAME_KEY`
-      obj["toString"] = makeToString(paths.join('.'));
+      obj.toString = makeToString(paths.join('.'));
       obj[NAME_KEY] = paths.join('.');
 
     // Support nested namespaces
@@ -99,7 +99,7 @@ function findNamespaces() {
     if (!STARTS_WITH_UPPERCASE.test(prop)) { continue; }
 
     // Unfortunately, some versions of IE don't support window.hasOwnProperty
-    if (lookup["hasOwnProperty"] && !lookup["hasOwnProperty"](prop)) { continue; }
+    if (lookup.hasOwnProperty && !lookup.hasOwnProperty(prop)) { continue; }
 
     // At times we are not allowed to access certain properties for security reasons.
     // There are also times where even if we can access them, we are not allowed to access their properties.
@@ -146,7 +146,7 @@ function classToString() {
     } else {
       ret = "(unknown mixin)";
     }
-    this["toString"] = makeToString(ret);
+    this.toString = makeToString(ret);
   }
 
   return ret;
@@ -165,7 +165,7 @@ function processAllNamespaces() {
     var namespaces = Namespace.NAMESPACES, namespace;
     for (var i=0, l=namespaces.length; i<l; i++) {
       namespace = namespaces[i];
-      processNamespace([namespace["toString"]()], namespace, {});
+      processNamespace([namespace.toString()], namespace, {});
     }
 
     Ember.anyUnprocessedMixins = false;
@@ -176,4 +176,4 @@ function makeToString(ret) {
   return function() { return ret; };
 }
 
-Mixin.prototype["toString"] = classToString; // ES6TODO: altering imported objects. SBB.
+Mixin.prototype.toString = classToString; // ES6TODO: altering imported objects. SBB.
