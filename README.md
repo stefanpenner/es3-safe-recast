@@ -2,6 +2,12 @@
 
 Recasts all [ECMAScript 3][1] reserved words to their safe alternatives.
 
+
+## helpers
+
+* [grunt-es3-safe-recast](https://github.com/phpro/grunt-es3-safe-recast)
+* [broccoli-es3-safe-recast](broccoli-es3-safe-recast)
+
 ## Before
 
 ```js
