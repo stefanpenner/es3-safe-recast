@@ -1,6 +1,6 @@
 {
   "name": "es3-safe-recast",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "esprima/recast es3 safe compile step",
   "main": "index.js",
   "directories": {
