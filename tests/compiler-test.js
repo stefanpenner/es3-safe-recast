@@ -15,10 +15,12 @@ describe('object properties', function() {
 });
 
 describe('parses es6-module-syntax without error', function() {
-  it('works', function(done) {
+  it('works', function() {
     var path = './tests/fixtures/es6-module-syntax';
     var actual = compiler.compile(readFileSync(path + '/input.js'));
-    done();
+    var expected = readFileSync(path + '/output.js');
+
+    astEqual(actual, expected, 'expected input.js and output.js to match');
   });
 });
 

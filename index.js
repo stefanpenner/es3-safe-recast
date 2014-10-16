@@ -1,5 +1,4 @@
 'use strict';
-var esprima = require('esprima');
 var recast = require('recast');
 var Visitor = recast.Visitor;
 var types = recast.types;
@@ -103,7 +102,7 @@ var TEST_REGEX = module.exports.TEST_REGEX = buildTestRegex();
 module.exports.compile = function(source) {
   var ast, code;
   if (TEST_REGEX.test(source)) {
-    ast = recast.parse(source, { esprima: esprima } );
+    ast = recast.parse(source);
     new ES6Safe().visit(ast);
     code = recast.print(ast).code;
   } else {
