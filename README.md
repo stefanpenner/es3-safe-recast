@@ -1,4 +1,4 @@
-# es3-safe-recast
+# es3-safe-recast [![Build Status](https://travis-ci.org/stefanpenner/es3-safe-recast.svg)](https://travis-ci.org/stefanpenner/es3-safe-recast)
 
 Recasts all [ECMAScript 3][1] reserved words to their safe alternatives.
 
