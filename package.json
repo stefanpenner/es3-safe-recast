@@ -17,9 +17,8 @@
   "author": "Stefan Penner",
   "license": "ISC",
   "dependencies": {
-    "recast": "~0.5.20",
-    "es-simpler-traverser": "0.0.1",
-    "esprima": "git+https://github.com/thomasboyt/esprima#4be906f1abcbb"
+    "recast": "~0.8.0",
+    "es-simpler-traverser": "0.0.1"
   },
   "devDependencies": {
     "mocha": "~1.18.2",
