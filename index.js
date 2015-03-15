@@ -1,6 +1,5 @@
 'use strict';
 var recast = require('recast');
-var Visitor = recast.Visitor;
 var types = recast.types;
 var namedTypes = types.namedTypes;
 var builders = types.builders;
@@ -75,35 +74,38 @@ identifierToLiteral.null = true;
 identifierToLiteral.true = true;
 identifierToLiteral.false = true;
 
-var ES6Safe = Visitor.extend({
-  visitProperty: function(node) {
+var visitor = {
+  visitProperty: function(path) {
+    var node = path.node;
+
     if (namedTypes.Identifier.check(node.key) && identifierToLiteral[node.key.name]) {
       node.key = builders.literal(node.key.name);
     }
 
-    return this.genericVisit(node);
+    return this.traverse(path);
   },
 
-  visitMemberExpression: function(node) {
+  visitMemberExpression: function(path) {
+    var node = path.node;
     var property = node.property;
     var newNode;
+
     if (namedTypes.Identifier.check(property) && identifierToLiteral[property.name]) {
-      newNode = builders.memberExpression(node.object, builders.literal(property.name), true);
+      path.replace(builders.memberExpression(node.object, builders.literal(property.name), true));
     } else {
       newNode = node;
     }
-    return this.genericVisit(newNode);
-  }
-});
 
-module.exports.Visitor = ES6Safe;
+    return this.traverse(path);
+  }
+};
 
 var TEST_REGEX = module.exports.TEST_REGEX = buildTestRegex();
 module.exports.compile = function(source) {
   var ast, code;
   if (TEST_REGEX.test(source)) {
     ast = recast.parse(source);
-    new ES6Safe().visit(ast);
+    recast.visit(ast, visitor);
     code = recast.print(ast).code;
   } else {
     code = source;
@@ -121,6 +123,7 @@ function buildTestRegex() {
 }
 
 module.exports.visit = function(ast) {
-  new ES6Safe().visit(ast);
+  recast.visit(ast, visitor);
+
   return ast;
 };

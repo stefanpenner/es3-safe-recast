@@ -8,21 +8,22 @@
   },
   "scripts": {
     "test": "mocha --reporter spec tests/**/*-test.js",
-    "test-watch": "mocha --watch --reporter spec tests/**/*-test.js"
+    "test:watch": "mocha --watch --reporter spec tests/**/*-test.js",
+    "test:debug": "mocha debug --reporter spec tests/**/*-test.js"
   },
   "repository": {
     "type": "git",
-    "url":  "https://github.com/stefanpenner/es3-safe-recast.git"
+    "url": "https://github.com/stefanpenner/es3-safe-recast.git"
   },
   "author": "Stefan Penner",
   "license": "ISC",
   "dependencies": {
-    "recast": "~0.8.0",
-    "es-simpler-traverser": "0.0.1"
+    "es-simpler-traverser": "0.0.1",
+    "recast": "^0.9.18"
   },
   "devDependencies": {
     "mocha": "~1.18.2",
     "better-assert": "~1.0.0",
-    "esprima-ast-equality": "0.0.4"
+    "ast-equality": "^1.0.0"
   }
 }

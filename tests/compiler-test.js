@@ -25,10 +25,19 @@ describe('parses es6-module-syntax without error', function() {
   });
 });
 
-
 describe('object member', function() {
   it('works', function() {
     var path = './tests/fixtures/object-member';
+    var actual = compiler.compile(readFileSync(path + '/input.js'));
+    var expected = readFileSync(path + '/output.js');
+
+    astEqual(actual, expected, 'expected input.js and output.js to match');
+  });
+});
+
+describe('such-es2015', function() {
+  it('works', function() {
+    var path = './tests/fixtures/such-es2015';
     var actual = compiler.compile(readFileSync(path + '/input.js'));
     var expected = readFileSync(path + '/output.js');
 
