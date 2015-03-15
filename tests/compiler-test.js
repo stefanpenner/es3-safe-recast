@@ -1,5 +1,5 @@
 var assert = require('better-assert');
-var astEqual = require('esprima-ast-equality');
+var astEqual = require('ast-equality');
 var readFileSync = require('fs').readFileSync;
 
 var compiler = require('./../index');
