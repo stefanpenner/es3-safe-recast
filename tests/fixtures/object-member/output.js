@@ -116,4 +116,6 @@ object["break"](function() {
 
 })["false"](function() {
 
+})["yield"](function() {
+
 });
