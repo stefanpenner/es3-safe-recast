@@ -74,6 +74,10 @@ identifierToLiteral.null = true;
 identifierToLiteral.true = true;
 identifierToLiteral.false = true;
 
+// yield literal
+// Not officially reserved but throws in Android 4.0
+identifierToLiteral.yield = true;
+
 var visitor = {
   visitProperty: function(path) {
     var node = path.node;

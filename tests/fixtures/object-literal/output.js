@@ -57,5 +57,6 @@ var object = {
   "volatile": null,
   "null": null,
   "true": null,
-  "false": null
+  "false": null,
+  "yield": null
 };
