@@ -18,8 +18,8 @@
   "author": "Stefan Penner",
   "license": "ISC",
   "dependencies": {
-    "es-simpler-traverser": "0.0.1",
-    "recast": "^0.9.18"
+    "recast": "^0.13.0",
+    "esprima": "^4.0.0"
   },
   "devDependencies": {
     "mocha": "~1.18.2",
