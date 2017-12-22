@@ -105,12 +105,12 @@ var visitor = {
 };
 
 var TEST_REGEX = module.exports.TEST_REGEX = buildTestRegex();
-module.exports.compile = function(source) {
+module.exports.compile = function(source, options) {
   var ast, code;
   if (TEST_REGEX.test(source)) {
     ast = recast.parse(source);
     recast.visit(ast, visitor);
-    code = recast.print(ast).code;
+    code = recast.print(ast, Object.assign({},options)).code;
   } else {
     code = source;
   }
