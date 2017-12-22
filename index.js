@@ -110,7 +110,9 @@ module.exports.compile = function(source, options) {
   if (TEST_REGEX.test(source)) {
     ast = recast.parse(source);
     recast.visit(ast, visitor);
-    code = recast.print(ast, Object.assign({},options)).code;
+    code = recast.print(ast, Object.assign({
+      trailingComma: false
+    },options)).code;
   } else {
     code = source;
   }
