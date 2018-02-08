@@ -25,5 +25,8 @@
     "mocha": "~1.18.2",
     "better-assert": "~1.0.0",
     "ast-equality": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 4"
   }
 }
