@@ -153,8 +153,10 @@ module.exports.compile = function(source, options) {
   } else {
     code = source;
   }
-
-  return removeTrailingComma(code);
+  if (options && options.trailingComma) {
+    return removeTrailingComma(code);
+  }
+  return code;
 };
 
 function buildTestRegex() {
