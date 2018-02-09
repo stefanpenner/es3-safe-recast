@@ -1,5 +1,6 @@
 'use strict';
 var recast = require('recast');
+var esprima = require('esprima');
 var types = recast.types;
 var namedTypes = types.namedTypes;
 var builders = types.builders;
@@ -104,8 +105,44 @@ var visitor = {
   }
 };
 
+//taken from remove-trailing-comma npm package, MIT licensed
+function removeTrailingComma(source) {
+  var syntax = esprima.parse(source, {
+    tokens: true,
+    range: true,
+    raw: true
+  });
+
+  var collectedDatas = [];
+
+  syntax.tokens.forEach(function(token, index, tokens) {
+    if (token.type === "Punctuator" &&
+        (token.value === "}" || token.value === "]") &&
+        tokens[index - 1].type === "Punctuator" &&
+        tokens[index - 1].value === ",") {
+      collectedDatas.push({
+        range: tokens[index - 1].range,
+        replaceString: ""
+      });
+    }
+  });
+
+  // no trailing comma found
+  if (collectedDatas.length === 0) {
+    return source;
+  }
+
+  // from the backward forward we can ignore the offset problem
+  for (var i = collectedDatas.length - 1; i >= 0; i--) {
+    var range = collectedDatas[i].range;
+    var replaceString = collectedDatas[i].replaceString;
+    source = source.slice(0, range[0]) + replaceString + source.slice(range[1]);
+  }
+  return source;
+}
+
 var TEST_REGEX = module.exports.TEST_REGEX = buildTestRegex();
-module.exports.compile = function(source) {
+module.exports.compile = function(source, options) {
   var ast, code;
   if (TEST_REGEX.test(source)) {
     ast = recast.parse(source);
@@ -114,7 +151,9 @@ module.exports.compile = function(source) {
   } else {
     code = source;
   }
-
+  if (options && options.trailingComma) {
+    return removeTrailingComma(code);
+  }
   return code;
 };
 

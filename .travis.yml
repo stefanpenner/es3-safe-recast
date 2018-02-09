@@ -1,6 +1,6 @@
 language: node_js
 sudo: false
 node_js:
-  - "0.10.18"
-  - "0.11"
+  - "4.0.0" # earliest supported release (see package.json)
+  - "node"  # latest stable node.js release
 script: npm test

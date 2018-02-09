@@ -2,6 +2,8 @@
 
 Recasts all [ECMAScript 3][1] reserved words to their safe alternatives.
 
+Optionally removes trailing commas in object and array literals (pass `{ trailingComma: true }` as the second argument to compile).
+
 
 ## helpers
 

@@ -1,6 +1,6 @@
 {
   "name": "es3-safe-recast",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "esprima/recast es3 safe compile step",
   "main": "index.js",
   "directories": {
@@ -18,12 +18,15 @@
   "author": "Stefan Penner",
   "license": "ISC",
   "dependencies": {
-    "es-simpler-traverser": "0.0.1",
-    "recast": "^0.9.18"
+    "recast": "^0.13.0",
+    "esprima": "^4.0.0"
   },
   "devDependencies": {
     "mocha": "~1.18.2",
     "better-assert": "~1.0.0",
     "ast-equality": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 4"
   }
 }

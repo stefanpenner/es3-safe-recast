@@ -53,11 +53,33 @@ it('protected local variable scope test', function() {
   astEqual(actual, expected, 'expected input.js and output.js to match');
 });
 
+it('should leave trailing commas in place when trailingComma option is not specified', function() {
+  var expected = 'var object = {\n a:1, b:[1,2,],\n};'
+  var actual = compiler.compile(expected);
+  
+  astEqual(actual, expected, "expected input and output to match.");
+});
+
+it('should remove trailing commas in object/array literals when trailingComma option is specified', function() {
+  var actual = compiler.compile('var object = {\n a:1, b:[1,2,],\n};', { trailingComma: true });
+  var expected = 'var object = {\n a:1, b:[1,2]\n};';
+
+  astEqual(actual, expected, "expected input and output to match");
+});
+
 function literalTestSuite(literal) {
   describe(literal, function() {
     it('works with literal syntax', function() {
       var actual = compiler.compile('var object = {\n' + literal + ': null,\n};');
       var expected = 'var object = {\n"' + literal + '": null,\n};'
+
+      astEqual(actual, expected, 'expected input.js and output.js to match');
+    });
+
+    it('works with literal syntax and set to remove trailing comma', function() {
+      var actual = compiler.compile('var object = {\n' + literal + ': null,\n};', { trailingComma: true });
+      debugger;
+      var expected = 'var object = {\n"' + literal + '": null\n};'
 
       astEqual(actual, expected, 'expected input.js and output.js to match');
     });
